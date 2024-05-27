@@ -14,4 +14,17 @@
     <!--3.实例工厂-->
     <bean id="if" class="com.liu.factory.InstanceFactory"/>
     <bean id="userService2" factory-bean="if" factory-method="getBean"/>
+    <!--setter注入-->
+    <!--UserDao对象-->
+    <bean id="userDao" class="com.liu.dao.UserDao"/>
+    <!--日期类型-->
+    <bean id="birthday" class="java.util.Date"/>
+    <!--UserService对象-->
+    <bean id="userService3" class="com.liu.service.impl.userServiceImpl3">
+        <!--注入属性值-->
+        <property name="num" value="100"/>
+        <property name="name" value="zhangsan"/>
+        <property name="birthday" ref="birthday"/>
+        <property name="userDao" ref="userDao"/>
+    </bean>
 </beans>
