@@ -38,3 +38,9 @@ setter注入方式和构造方法
     <!-- 给bean对象中的成员赋值（依赖注入） -->
 	<property name="propertyName" value="propertyValue" ref="beanId"/>
 </bean>
+2.构造器注入
+<bean id="beanId" class="ClassName">
+	<constructor-arg name="argsName" value="argsValue" ref="beanId"/>
+</bean>
+要求类中必须有带参数的构造方法
+
