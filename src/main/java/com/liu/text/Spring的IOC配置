@@ -85,6 +85,13 @@ List、Set、Array、Map、Properties
          </props>
     </property>
 </bean>
+六、EL表达式（数据引用）
+#{}:把指定的内容赋值给属性
+${}:用于加载外部文件中指定的Key值
+<bean id="beanId" class="className">
+    <property name="成员变量名" value="EL表达式"/>
+    例如<property name="name" value="#{'zhangsan'}"/>
+</bean>
 
 
 
