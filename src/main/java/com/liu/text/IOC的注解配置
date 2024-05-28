@@ -1,0 +1,7 @@
+一、开启注解配置
+需要在配置文件中开启Spring注解扫描
+根据指定的包名，加载类中配置的注解项
+<context:component-scan base-package="packageName"/>
+注解格式和XML配置格式，差别仅仅是数据读取方式不同，从加载效率上来说注解优于XML配置文件
+二、使用@Component注解装配bean
+@Component   相当于在xml中配置：<bean id="" class="">

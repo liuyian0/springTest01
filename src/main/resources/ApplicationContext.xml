@@ -8,6 +8,8 @@
         https://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
         https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--开启Spring注解扫描-->
+    <context:component-scan base-package="com.liu"/>
     <!-- 创建spring控制的资源
          id : 是这个bean(类)的标识。  【见名知其意】
          class : 指定实现类的全限定名。
