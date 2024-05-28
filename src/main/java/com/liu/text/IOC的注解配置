@@ -10,3 +10,25 @@
 @Controller：一般用于表现层的注解
 @Service：一般用于业务层的注解
 @Repository：一般用于持久层的注解
+四、属性注入
+使用@Autowired或@Qualifier实现引用类型属性注入
+格式：
+public class ClassName{
+@Autowired
+private 引用类型 对象名；
+}
+- 作用：按照类型注入引用类型对象
+  - 当容器中只有一个类型匹配的对象时直接注入
+  - 当有多个类型匹配的对象时，使用要注入的对象的变量名称作为bean的id，在spring容器查找，找到了也可以注入成功，找不到就报错。
+- 细节：当使用注解注入属性时，可以省略setter方法
+例：使用@Autowired向业务类中注入dao对象
+@Autowired注解的属性：
+required通常不写
+取值：默认true（必定注入成功，失败报错）false（可以不成功）
+@Qualifier格式
+public class ClassName{
+    @Autowired
+    @Qualifier("beanId")
+    private 引用类型 对象名;
+}
+在自动按照类型注入(@Autowired)的基础之上，再按照bean的id注入
