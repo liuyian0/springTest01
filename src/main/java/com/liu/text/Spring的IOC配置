@@ -92,8 +92,16 @@ ${}:用于加载外部文件中指定的Key值
     <property name="成员变量名" value="EL表达式"/>
     例如<property name="name" value="#{'zhangsan'}"/>
 </bean>
-
-
+七、引入外部资源文件
+步骤：
+1.外部创建properties文件
+2.在xml中开启context命名空间支持
+xmlns:context="http://www.springframework.org/schema/context"
+3.加载指定的配置文件
+<context:property-placeholder location="classpath:filename.properties"/>
+*.properties表示加载所有的properties文件
+4.使用加载的数据
+<property name="成员变量名" value="${propertiesName}"/>
 
 
 

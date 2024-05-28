@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--新增开启context命名空间支持-->
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd">
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
     <!-- 创建spring控制的资源
          id : 是这个bean(类)的标识。  【见名知其意】
          class : 指定实现类的全限定名。
@@ -39,5 +44,13 @@
         <constructor-arg name="name" value="zhangsan"/>
         <constructor-arg name="birthday" ref="birthday"/>
         <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
+    <!--加载外部资源文件-->
+    <context:property-placeholder location="classpath:data.properties"/>
+    <bean id="userService5" class="com.liu.service.impl.UserServiceImpl4">
+        <property name="num" value="${num}"/>
+        <property name="name" value="${name}"/>
+        <property name="birthday" value="#{birthday}"/>
+        <property name="userDao" value="#{userDao}"/>
     </bean>
 </beans>
