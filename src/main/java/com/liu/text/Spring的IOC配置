@@ -43,4 +43,62 @@ setter注入方式和构造方法
 	<constructor-arg name="argsName" value="argsValue" ref="beanId"/>
 </bean>
 要求类中必须有带参数的构造方法
+3.集合类型数据注入
+List、Set、Array、Map、Properties
+<!-- List类型数据注入 -->
+<bean id="beanId" class="className">
+    <property name="成员变量名">
+        <list>
+             <value>元素</value>
+        </list>
+    </property>
+</bean>
+<!-- Set类型数据注入 -->
+<bean id="beanId" class="className">
+    <property name="成员变量名">
+        <set>
+            <value>元素</value>
+        </set>
+    </property>
+</bean>
+<!-- 数组类型数据注入 -->
+<bean id="beanId" class="className">
+    <property name="成员变量名">
+         <array>
+              <value>元素值</value>
+         </array>
+    </property>
+</bean>
+<!-- Map类型数据注入 -->
+<bean id="beanId" class="className">
+     <property name="成员变量名">
+         <map>
+             <entry key="key元素" value="value元素"/>
+         </map>
+     </property>
+</bean>
+<!-- Properties类型数据注入 -->
+<bean id="beanId" class="className">
+    <property name="成员变量名">
+         <props>
+              <prop key="key元素">value元素</prop>
+         </props>
+    </property>
+</bean>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
