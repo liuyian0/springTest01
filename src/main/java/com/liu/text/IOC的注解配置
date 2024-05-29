@@ -40,3 +40,27 @@ private int num;
 @Value("zhangsan")
 private String name;
 }
+4.使用@PropertySource加载properties文件
+@PropertySource(value = "文件名.properties")
+public class ClassName {
+    @Value("${properties文件中的属性名}")
+    private String attributeName;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
