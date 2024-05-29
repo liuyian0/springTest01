@@ -45,7 +45,18 @@ private String name;
 public class ClassName {
     @Value("${properties文件中的属性名}")
     private String attributeName;
-}
+    }
+5.纯注解开发
+取消spring的xml配置文件，使用纯注解开发模式：
+1. 指定配置类，代替xml配置文件
+2. 在配置类中指定要扫描的包
+3. 使用AnnotationConfigApplicationContext类代替ClassPathXmlApplicationContext类
+@Configuration注解：指定当前类是一个spring配置类，当创建容器时会从该类上加载注解
+配置创建容器时要扫描的包
+@ComponentScan("包名路径")
+相当于xml文件中的<context:component-scan base-package="包名路径"/>
+ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
+
 
 
 
