@@ -56,9 +56,25 @@ public class ClassName {
 @ComponentScan("包名路径")
 相当于xml文件中的<context:component-scan base-package="包名路径"/>
 ApplicationContext ctx = new AnnotationConfigApplicationContext(SpringConfig.class);
-
-
-
+6.加载第三方资源
+①在配置文件中，把第三方框架中的类，配置到Spring容器中
+例如：
+    <!-- 配置Druid中的类，作为Spring容器中的一个资源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db1"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="itheima"></property>
+    </bean>
+②纯注解开发时，使用@Bean装配Bean
+@Component
+public class ClassName{
+    @Bean("名字")
+    public 返回值类型 方法名(){
+        return 返回值;
+    }
+}
+设置方法的返回值作为spring管理的bean（将方法的返回值作为一个bean,并且放入spring容器）
 
 
 
