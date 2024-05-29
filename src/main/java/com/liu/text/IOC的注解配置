@@ -14,7 +14,7 @@
 使用@Autowired或@Qualifier实现引用类型属性注入
 格式：
 public class ClassName{
-@Autowired
+1.@Autowired
 private 引用类型 对象名；
 }
 - 作用：按照类型注入引用类型对象
@@ -25,10 +25,18 @@ private 引用类型 对象名；
 @Autowired注解的属性：
 required通常不写
 取值：默认true（必定注入成功，失败报错）false（可以不成功）
-@Qualifier格式
+2.@Qualifier格式
 public class ClassName{
     @Autowired
     @Qualifier("beanId")
     private 引用类型 对象名;
 }
 在自动按照类型注入(@Autowired)的基础之上，再按照bean的id注入
+3.使用@Value实现非引用类型(基本类型、String类、包装类，可以读取properti文件中的属性值，支持EL表达式)属性注入
+例如：
+public class ClassName{
+@Value("100")
+private int num;
+@Value("zhangsan")
+private String name;
+}
