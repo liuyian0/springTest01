@@ -1,0 +1,10 @@
+一、Spring整合Mybatis
+步骤：
+1. 数据库
+2. 构造maven项目
+3. 导入坐标 [Mybatis、Mysql、Druid、Spring、Junit]
+4. Pojo类
+5. Dao层
+6. Service层
+7. 配置文件
+8. 工具类：SqlSessionUtil
