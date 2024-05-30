@@ -81,6 +81,9 @@ public class ClassName{
 //@Import(...)//同一个类上，不允许出现2次Import
 public class ClassName {
 }
+7.使用@Scope注解设置Bean的作用域singleton和prototype
+8.bean的生命周期
+使用@PostConstruct、@PreDestory设置初始化、销毁方法
 
 
 
