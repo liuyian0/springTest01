@@ -10,8 +10,8 @@
         https://www.springframework.org/schema/context/spring-context.xsd">
     <!--开启Spring注解扫描-->
     <context:component-scan base-package="com.liu"/>
-    <!-- 配置Druid中的类，作为Spring容器中的一个资源 -->
-<!--    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+<!--    &lt;!&ndash; 配置Druid中的类，作为Spring容器中的一个资源 &ndash;&gt;
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/db1"></property>
         <property name="username" value="root"></property>

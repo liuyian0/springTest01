@@ -5,15 +5,18 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 
 //Mybatis配置类
 public class MyBatisConfig {
     //传统方法：SqlSessionFactoryBuilder -> SqlSessionFactory -> SqlSession -> AccountDao
-
+/*
     //将SqlSessionFactory放入ioc容器中
     @Bean("factory")
     public SqlSessionFactory getFactory() throws IOException {
@@ -33,5 +36,18 @@ public class MyBatisConfig {
     public AccountDao getDao(SqlSession sqlSession){
         AccountDao accountDao = sqlSession.getMapper(AccountDao.class);
         return accountDao;
+    }*/
+    //优化Spring整合mybatis
+    @Bean
+    public SqlSessionFactoryBean getSqlSessionFactoryBean(DataSource ds){
+        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        factoryBean.setDataSource(ds);
+        return factoryBean;
+    }
+    @Bean
+    public MapperScannerConfigurer mapperScannerConfigurer(){
+        MapperScannerConfigurer msc = new MapperScannerConfigurer();
+        msc.setBasePackage("com.liu.dao");
+        return msc;
     }
 }
