@@ -8,3 +8,24 @@
 6. Service层
 7. 配置文件
 8. 工具类：SqlSessionUtil
+
+二、Spring整合Junit
+测试类问题
+每个测试方法都要有以下代码
+//加载配置初始化容器
+ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
+或
+ApplicationContext ac = new AnnotationConfigApplicationContext(SpringConfig.class);
+//从容器中获取对象
+IUserService userService = (IUserService)ac.getBean("userService");
+不运行这两行代码的话就会有空指针异常
+解决思路：在spring框架中提供了一个运行器，可以读取配置文件或注解配置类来创建容器。只需要告诉它配置类或配置文件在哪就行了。
+格式：
+@RunWith(SpringJUnit4ClassRunner.class)//替换掉junit的运行器,换成可以初始化spring容器的运行器
+@ContextConfiguration(classes = {SpringConfig.class})//加载配置类
+public class 测试类{
+}
+步骤：
+1.导入坐标junit和spring-test
+2.在测试类上添加@RunWith、@ContextConfiguration
+

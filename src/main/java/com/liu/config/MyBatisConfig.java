@@ -16,7 +16,6 @@ import java.io.InputStream;
 //Mybatis配置类
 public class MyBatisConfig {
     //传统方法：SqlSessionFactoryBuilder -> SqlSessionFactory -> SqlSession -> AccountDao
-/*
     //将SqlSessionFactory放入ioc容器中
     @Bean("factory")
     public SqlSessionFactory getFactory() throws IOException {
@@ -36,9 +35,9 @@ public class MyBatisConfig {
     public AccountDao getDao(SqlSession sqlSession){
         AccountDao accountDao = sqlSession.getMapper(AccountDao.class);
         return accountDao;
-    }*/
+    }
     //优化Spring整合mybatis
-    @Bean
+/*    @Bean
     public SqlSessionFactoryBean getSqlSessionFactoryBean(DataSource ds){
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(ds);
@@ -49,5 +48,5 @@ public class MyBatisConfig {
         MapperScannerConfigurer msc = new MapperScannerConfigurer();
         msc.setBasePackage("com.liu.dao");
         return msc;
-    }
+    }*/
 }

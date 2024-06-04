@@ -6,16 +6,14 @@ import org.springframework.context.annotation.*;
 
 import javax.sql.DataSource;
 
-/*
 @Configuration
 @ComponentScan("com.liu")
 @Import(MyBatisConfig.class)
 public class SpringConfig4 {
 }
-*/
 
 //优化Spring整合Mybatis
-@Configuration
+/*@Configuration
 @ComponentScan("com.liu")
 @PropertySource("classpath:db.properties")
 @Import(MyBatisConfig.class)
@@ -37,4 +35,4 @@ public class SpringConfig4{
         ds.setPassword(password);
         return ds;
     }
-}
+}*/
