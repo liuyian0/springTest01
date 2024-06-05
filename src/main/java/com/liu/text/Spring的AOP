@@ -83,6 +83,15 @@ aop入门案例执行机制：
    - 在运行过程中spring底层将通知和切入点进行整合
 3. 使用代理对象调用方法
 
+事务案例：转账
+数据库控制文件：db.properties
+pojo类：Account
+Mybatis配置类：MybatisConfig
+Spring配置类：SpringConfig4
+dao层：AccountDao2
+业务层：AccountService2
+实现类：AccountService2Impl
+测试类：WebApp
 
 
 

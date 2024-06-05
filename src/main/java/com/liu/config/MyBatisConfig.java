@@ -1,21 +1,14 @@
 package com.liu.config;
 
-import com.liu.dao.AccountDao;
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.io.InputStream;
 
 //Mybatis配置类
 public class MyBatisConfig {
-    //传统方法：SqlSessionFactoryBuilder -> SqlSessionFactory -> SqlSession -> AccountDao
+    /*传统方法：SqlSessionFactoryBuilder -> SqlSessionFactory -> SqlSession -> AccountDao
     //将SqlSessionFactory放入ioc容器中
     @Bean("factory")
     public SqlSessionFactory getFactory() throws IOException {
@@ -35,18 +28,22 @@ public class MyBatisConfig {
     public AccountDao getDao(SqlSession sqlSession){
         AccountDao accountDao = sqlSession.getMapper(AccountDao.class);
         return accountDao;
-    }
+    }*/
     //优化Spring整合mybatis
-/*    @Bean
+    @Bean
     public SqlSessionFactoryBean getSqlSessionFactoryBean(DataSource ds){
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        //设置pojo的包扫描
+        factoryBean.setTypeAliasesPackage("com.liu.pojo");
+        //设置连接池
         factoryBean.setDataSource(ds);
         return factoryBean;
     }
     @Bean
     public MapperScannerConfigurer mapperScannerConfigurer(){
         MapperScannerConfigurer msc = new MapperScannerConfigurer();
+        //设置dao层的接口扫描
         msc.setBasePackage("com.liu.dao");
         return msc;
-    }*/
+    }
 }
