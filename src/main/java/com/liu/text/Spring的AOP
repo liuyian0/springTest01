@@ -163,6 +163,8 @@ TransactionStatus ts = dstm.getTransaction(new DefaultTransactionDefinition());
 //5、提交事务|回滚事务
 dstm.commit(ts);
 
+Spring事务-编程式事务
+使用编程式事务改造转账业务
 
 
 
