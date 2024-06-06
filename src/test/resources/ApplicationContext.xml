@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--新增开启context命名空间支持-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--开启Spring注解扫描-->
+    <context:component-scan base-package="com.liu"/>
+<!--    &lt;!&ndash; 配置Druid中的类，作为Spring容器中的一个资源 &ndash;&gt;
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/db1"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="1234"></property>
+    </bean>-->
+    <!-- 创建spring控制的资源
+         id : 是这个bean(类)的标识。  【见名知其意】
+         class : 指定实现类的全限定名。
+     -->
+    <!--1.直接配置-->
+    <bean id="userService" class="com.liu.service.impl.UserServiceImpl"/>
+    <!--2.静态工厂-->
+    <bean id="userService1" class="com.liu.factory.StaticFactory" factory-method="getBean"/>
+    <!--3.实例工厂-->
+    <bean id="if" class="com.liu.factory.InstanceFactory"/>
+    <bean id="userService2" factory-bean="if" factory-method="getBean"/>
+    <!--setter注入-->
+    <!--UserDao对象-->
+    <bean id="userDao" class="com.liu.dao.UserDao"/>
+    <!--日期类型-->
+    <bean id="birthday" class="java.util.Date"/>
+    <!--UserService对象-->
+    <bean id="userService3" class="com.liu.service.impl.userServiceImpl3">
+        <!--注入属性值-->
+        <property name="num" value="100"/>
+        <property name="name" value="zhangsan"/>
+        <property name="birthday" ref="birthday"/>
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <!--构造器注入-->
+    <!--UserDao对象-->
+    <!--bean id="userDao" class="com.liu.dao.UserDao"/-->
+    <!--日期类型-->
+    <!--bean id="birthday" class="java.util.Date"/-->
+    <!--UserService对象-->
+    <bean id="userService4" class="com.liu.service.impl.UserServiceImpl4">
+        <!--注入属性值-->
+        <constructor-arg name="num" value="100"/>
+        <constructor-arg name="name" value="zhangsan"/>
+        <constructor-arg name="birthday" ref="birthday"/>
+        <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
+    <!--加载外部资源文件-->
+    <context:property-placeholder location="classpath:data.properties"/>
+    <bean id="userService5" class="com.liu.service.impl.UserServiceImpl4">
+        <property name="num" value="${num}"/>
+        <property name="name" value="${name}"/>
+        <property name="birthday" value="#{birthday}"/>
+        <property name="userDao" value="#{userDao}"/>
+    </bean>
+
+</beans>

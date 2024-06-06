@@ -93,6 +93,80 @@ dao层：AccountDao2
 实现类：AccountService2Impl
 测试类：WebApp
 
+Spring事务管理对象
+JavaEE开发使用分层设计的思想进行
+一般dao层只做数据库增删改查实现，当业务中包含多个dao层的调用时，需要在service层开启事务，对数据层中多个操作进行组合并归属于同一个事务进行处理
+1. Spring事务核心对象介绍
+
+2. 事务管理器对象(PlatformTransactionManager接口)
+- DataSourceTransactionManager类
+  - 适用于SpringJDBC或MyBatis
+- HibernateTransactionManager类
+  - 适用于Hibernate3.0及以上版本
+- JpaTransactionManager类
+  - 适用于JPA (Java EE 标准之一，为POJO提供持久化标准规范，并规范了持久化开发的统一API，符合JPA规范的开发可以在不同的JPA框架下运行)
+PlatformTransactionManager接口定义了事务的基本操作：
+①获取事务
+TransactionStatus getTransaction(TransactionDefinition definition)
+②提交事务
+void commit(TransactionStatus status)
+③回滚事务
+void rollback(TransactionStatus status)
+示例：//1. 创建事务管理器
+    DataSourceTransactionManager dstm = new DataSourceTransactionManager();
+    //2. 为事务管理器设置与数据层相同的数据源
+    dstm.setDataSource(dataSource);
+
+3. 事务定义对象(TransactionDefinition)
+DefaultTransactionDefinition td = new DefaultTransactionDefinition();
+TransactionDefinition接口定义了事务的基本信息：
+①事务隔离级别
+td.setIsolationLevel(TransactionDefinition.ISOLATION_DEFAULT);
+//mysql默认隔离级别是REPEATABLE_READ
+//oracle默认隔离级别是READ_COMMITTED
+②事务是否只读
+td.setReadOnly(false);
+//false, 表示可读可写(适合增删改操作)【默认设置】
+//true, 表示只读(适合查,效率高)
+③事务超时时间（秒）
+td.setTimeout(10);//超时时间为10秒
+//默认值是-1, 表示永不超时
+④事务传播行为
+td.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+
+4. 事务状态对象(TransactionStatus)
+定义了事务在执行过程中某个时间点上事务对象的状态信息
+创建事务状态对象   (用于控制事务执行[相当于开启事务])
+TransactionStatus ts = dstm.getTransaction(td);
+获取事务是否处于新开启事务状态
+boolean isNewTransaction();
+获取事务是否处于完成状态
+boolean isCompleted();
+//获取事务是否处于回滚状态
+boolean isRollbackOnly();
+//获取事务是否具备回滚存储点
+boolean hasSavepoint();
+//设置事务处于回滚状态
+void setRollbackOnly()
+//刷新事务状态
+void flush();
+
+代码示例：
+//1、创建事务管理器对象
+DataSourceTransactionManager dstm = new DataSourceTransactionManager();
+//2、把事务器对象和数据库连接池进行绑定
+dstm.setDataSource(dataSource);
+//3、开启事务
+TransactionStatus ts = dstm.getTransaction(new DefaultTransactionDefinition());
+//4、事务操作（业务）
+业务层中的代码.....
+//5、提交事务|回滚事务
+dstm.commit(ts);
+
+
+
+
+
 
 
 
