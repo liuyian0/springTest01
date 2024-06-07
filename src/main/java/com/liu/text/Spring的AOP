@@ -195,9 +195,34 @@ public DataSourceTransactionManager getTxManager(DataSource dataSource){
 void transfer(int outId,int inId,double money);
 使用声明式事务实现转账业务
 
+Spring中的事务传播行为
+- 在一个业务流程(有事务的业务流)中，通常会调用多个方法执行，而每个方法对于事务的处理态度
+@Transactional(
+    propagation = Propagation.REQUIRED //事务传播行为
+)
+public abstract void transfer(int outId, int inId, money money);
+取值：
+- REQUIRED （默认的传播行为）
+  - 支持当前事务，如果不存在，就新建一个
+- SUPPORTS
+  - 支持当前事务，如果不存在，就不使用事务
+- REQUIRES_NEW
+  - 不论当前事务是否存在，都创建一个新的事务
+- NOT_SUPPORTED
+  - 以非事务方式运行，如果有事务存在，挂起当前事务
+- MANDATORY
+  - 支持当前事务，如果不存在，抛出异常
+- NEVER
+  - 以非事务方式运行，如果有事务存在，抛出异常
+- NESTED
+  - 如果当前事务存在，则嵌套事务执行（一个事务， 在A事务调用B过程中，B失败了，回滚事务到之前SavePoint ，用户可以选择提交事务或者回滚事务）
 
-
-
+示例：
+1.创建数据表db_log
+2.Mybatis配置类MybatisConfig
+3.Spring配置类SpringConfig5
+4.业务层AccountService2
+5.
 
 
 
